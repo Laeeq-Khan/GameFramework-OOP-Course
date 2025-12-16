@@ -29,42 +29,29 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             gameTimer = new System.Windows.Forms.Timer(components);
-            player1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)player1).BeginInit();
+            timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
-            // gameTimer
+            // timer1
             // 
-            gameTimer.Enabled = true;
-            gameTimer.Tick += gameTimer_Tick;
+            timer1.Enabled = true;
+            timer1.Interval = 16;
+            timer1.Tick += timer1_Tick;
             // 
-            // player1
-            // 
-            player1.Image = (Image)resources.GetObject("player1.Image");
-            player1.Location = new Point(378, 384);
-            player1.Name = "player1";
-            player1.Size = new Size(97, 123);
-            player1.SizeMode = PictureBoxSizeMode.StretchImage;
-            player1.TabIndex = 0;
-            player1.TabStop = false;
-            // 
-            // Game
+            // GameForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1091, 606);
-            Controls.Add(player1);
-            Name = "Game";
+            Name = "GameForm";
             Text = "Game";
-            ((System.ComponentModel.ISupportInitialize)player1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private System.Windows.Forms.Timer gameTimer;
-        private PictureBox player1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

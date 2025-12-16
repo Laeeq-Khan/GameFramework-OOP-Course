@@ -10,5 +10,6 @@ namespace GameFrameWork
 
         // If true the object is considered rigid (immovable) and should stop when colliding
         bool IsRigidBody { get; set; }
+        // Note: IPhysicsObject separates the physics-related concerns from the entity's domain logic (single responsibility & interface segregation).
     }
 }

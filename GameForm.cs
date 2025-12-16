@@ -25,12 +25,16 @@ namespace GameFrameWork
         {
             InitializeComponent();
             DoubleBuffered = true;
-
+            Setting();
+        }
+      
+        private void Setting()
+        {
             game.AddObject(new Player
             {
                 Position = new PointF(100, 200),
-                Size = new Size(40, 40),
-                Sprite = Resources.fire,
+                Size = new Size(100, 100),
+                Sprite = Resources.playersprite,
                 Movement = new KeyboardMovement()
             });
 
@@ -39,10 +43,10 @@ namespace GameFrameWork
                 Position = new PointF(250, 100),
                 Size = new Size(100, 100),
                 HasPhysics = true,
-               // Movement = new PatrolMovement(left: 100, right: 500)
+                // Movement = new PatrolMovement(left: 100, right: 500)
             });
 
-            // A physics-enabled rigid player — will stop on collision and gravity will be disabled
+            // A physics enabled rigid player — will stop on collision and gravity will be disabled
             game.AddObject(new Player
             {
                 Position = new PointF(250, 350),
@@ -56,17 +60,14 @@ namespace GameFrameWork
                 Size = new Size(50, 50),
                 HasPhysics = false // Enable physics with default gravity
             });
-
-            timer.Interval = 16;
-            timer.Tick += GameLoop;
-            timer.Start();
         }
 
-        private void gameTimer_Tick(object sender, EventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
-
+            game.Draw(e.Graphics);
         }
-        private void GameLoop(object sender, EventArgs e)
+
+        private void timer1_Tick(object sender, EventArgs e)
         {
             // Update all game objects
             game.Update(new GameTime());
@@ -83,11 +84,5 @@ namespace GameFrameWork
             // Redraw the game
             Invalidate();
         }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            game.Draw(e.Graphics);
-        }
-
     }
 }

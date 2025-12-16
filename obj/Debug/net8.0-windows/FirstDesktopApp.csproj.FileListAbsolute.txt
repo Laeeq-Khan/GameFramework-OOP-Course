@@ -65,3 +65,4 @@ C:\Users\mlaee\source\repos\FirstDesktopApp\FirstDesktopApp\bin\Debug\net8.0-win
 C:\Users\mlaee\source\repos\FirstDesktopApp\FirstDesktopApp\obj\Debug\net8.0-windows\FirstDesktopApp.Properties.Resources.resources
 C:\Users\mlaee\source\repos\FirstDesktopApp\FirstDesktopApp\obj\Debug\net8.0-windows\GameFrameWork.Game.resources
 C:\Users\mlaee\source\repos\FirstDesktopApp\FirstDesktopApp\obj\Debug\net8.0-windows\GameFrameWork.GameForm.resources
+c:\Users\mlaee\source\repos\FirstDesktopApp\FirstDesktopApp\obj\Debug\net8.0-windows\FirstDesktopApp.sourcelink.json

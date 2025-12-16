@@ -15,17 +15,24 @@ namespace GameFrameWork
                 {
                     if (collidables[i].Bounds.IntersectsWith(collidables[j].Bounds))
                     {
-                        // Resolve simple overlap and apply rigid-body behavior
+                        // Collision detected between two collidables.
+                        // Primary responsibilities:
+                        // - Detect overlap (collision)
+                        // - Resolve overlap (simple axis-aligned separation)
+                        // - Apply special rigid-body behavior if flagged
+                        // - Notify objects so they can react (OnCollision)
+
                         var a = (GameObject)collidables[i];
                         var b = (GameObject)collidables[j];
 
+                        // Compute the intersection rectangle (axis-aligned overlap)
                         var overlap = RectangleF.Intersect(a.Bounds, b.Bounds);
                         if (overlap.Width > 0 && overlap.Height > 0)
                         {
-                            // If either object is a rigid body, it should stop and not be affected by gravity
+                            // Handle rigid-body cases specially: immovable objects stop others
                             if (a.IsRigidBody && !b.IsRigidBody)
                             {
-                                // push b out of a and stop b
+                                // Push b out of a along the smaller penetration axis and stop its motion.
                                 if (overlap.Width < overlap.Height)
                                 {
                                     if (a.Position.X < b.Position.X)
@@ -44,7 +51,7 @@ namespace GameFrameWork
                             }
                             else if (b.IsRigidBody && !a.IsRigidBody)
                             {
-                                // push a out of b and stop a
+                                // Push a out of b and stop its motion.
                                 if (overlap.Width < overlap.Height)
                                 {
                                     if (b.Position.X < a.Position.X)
@@ -63,7 +70,7 @@ namespace GameFrameWork
                             }
                             else
                             {
-                                // Neither or both are rigid — do simple half separation to avoid sticking
+                                // Neither or both are rigid: separate both by half the overlap to avoid sticking.
                                 if (overlap.Width < overlap.Height)
                                 {
                                     float sep = overlap.Width / 2f;
@@ -94,7 +101,7 @@ namespace GameFrameWork
                                 }
                             }
 
-                            // Stop rigid bodies and disable their physics so gravity won't affect them
+                            // If any object is rigid, ensure it is stopped and physics disabled so gravity won't affect it further.
                             if (a.IsRigidBody)
                             {
                                 a.Velocity = PointF.Empty;
@@ -107,7 +114,8 @@ namespace GameFrameWork
                             }
                         }
 
-                        // Notify objects about the collision so they can react (damage, pickup, etc.)
+                        // Notify objects about the collision so they can react (damage, pickup, etc.).
+                        // This shows encapsulation: each object decides its own reaction.
                         collidables[i].OnCollision((GameObject)collidables[j]);
                         collidables[j].OnCollision((GameObject)collidables[i]);
                     }
